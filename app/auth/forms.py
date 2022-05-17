@@ -9,3 +9,11 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password',validators = [InputRequired(), EqualTo('password_confirm',message = 'Passwords must match')])
     password_confirm = PasswordField('Confirm Password',validators = [InputRequired()])
     submit = SubmitField('Sign Up')
+
+    def validate_email(self,data_field):
+        if User.query.filter_by(email =data_field.data).first():
+            raise ValidationError('This account exists')
+
+    def validate_username(self,data_field):
+        if User.query.filter_by(username = data_field.data).first():
+            raise ValidationError('The username is already taken')
