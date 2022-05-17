@@ -17,3 +17,10 @@ class RegistrationForm(FlaskForm):
     def validate_username(self,data_field):
         if User.query.filter_by(username = data_field.data).first():
             raise ValidationError('The username is already taken')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Enter Email Address',validators=[InputRequired(),Email()])
+    password = PasswordField('Password',validators =[InputRequired()])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Sign In')
