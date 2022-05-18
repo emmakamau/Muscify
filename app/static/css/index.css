@@ -50,6 +50,7 @@ body {
 .brand-logo-name {
   margin-left: 1rem;
   font-size:xx-large;
+  font-family: 'Old Standard TT', serif;
 }
 
 .brand-logo-name:hover{
@@ -311,11 +312,11 @@ body {
 }
 
 .join-form {
-  background-color: #202027;
   width: 50vw;
-  max-width: 50%;
+  max-width: 40%;
   padding: 2rem 4rem;
   border-radius: 20px;
+  margin-right: 4vw;
 }
 
 .input-group {
