@@ -41,6 +41,11 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
+@main.route('/contact')
+def contact():
+
+    return render_template('contact.html')
+
 @main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id):
