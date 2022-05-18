@@ -4,7 +4,7 @@ from . models import Chart
 base_url = 'https://api.deezer.com/chart/tracks'
 
 
-def getchart():
+def getChartTracks():
     getchart_url = base_url
     with urllib.request.urlopen(getchart_url) as url:
         get_chart_data = url.read()
@@ -19,12 +19,17 @@ def getchart():
 def process_results(chart_list):
   chart_results = []
   for chart in chart_list:
+    # artistId,artistName,albumId
+    # language = books.get('volumeInfo',{}).get('language')
     id = chart.get('id')
     title = chart.get('title')
     link = chart.get('link')
     preview = chart.get('preview')
+    artistId = chart.get('artist',{}).get('id')
+    artistName = chart.get('artist',{}).get('name')
+    artistAlbum = chart.get('album',{}).get('id')
 
-    chart_object = Chart(id,title,link,preview)
+    chart_object = Chart(id,title,link,preview,artistId,artistName,artistAlbum)
     chart_results.append(chart_object)
   return chart_results
 
