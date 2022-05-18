@@ -1,8 +1,7 @@
 import urllib.request,json
 from . models import Chart
 
-base_url = 'https://api.deezer.com/chart/tracks'
-
+base_url = 'https://api.deezer.com/chart'
 
 def getChartTracks():
     getchart_url = base_url
@@ -19,8 +18,6 @@ def getChartTracks():
 def process_results(chart_list):
   chart_results = []
   for chart in chart_list:
-    # artistId,artistName,albumId
-    # language = books.get('volumeInfo',{}).get('language')
     id = chart.get('id')
     title = chart.get('title')
     link = chart.get('link')
@@ -28,8 +25,9 @@ def process_results(chart_list):
     artistId = chart.get('artist',{}).get('id')
     artistName = chart.get('artist',{}).get('name')
     artistAlbum = chart.get('album',{}).get('id')
+    albumImage = chart.get('album',{}).get('picture_medium')
 
-    chart_object = Chart(id,title,link,preview,artistId,artistName,artistAlbum)
+    chart_object = Chart(id,title,link,preview,artistId,artistName,artistAlbum,albumImage)
     chart_results.append(chart_object)
   return chart_results
 
