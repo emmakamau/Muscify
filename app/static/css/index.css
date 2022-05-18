@@ -8,7 +8,6 @@ font-family: 'Open Sans', sans-serif;
 */
 
 /* General Styling */
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -32,6 +31,14 @@ body {
   flex-direction: column;
 }
 
+.brand-logo:hover{
+  text-decoration: none;
+}
+
+.brand-logo:focus{
+  text-decoration: none;
+}
+
 .brand-logo {
   display: flex;
   align-items: center;
@@ -42,11 +49,22 @@ body {
 
 .brand-logo-name {
   margin-left: 1rem;
+  font-size:xx-large;
+}
+
+.brand-logo-name:hover{
+  text-decoration: none;
+  color: #0ff0fe;
+}
+
+.brand-logo-name:focus{
+  text-decoration: none;
+  color: #0ff0fe;
 }
 
 .main-nav ul, .footer-nav ul {
   display: flex;
-  margin: 0;
+  margin-right:3vw;
   padding: 0;
   list-style: none;
 }
@@ -68,12 +86,17 @@ body {
 }
 
 .main-header {
-  height: 140px;
+  height: 70px;
 }
 
 .main-footer {
   height: 70px;
   background-color:#043c3d;
+  font-weight: bold;
+}
+
+.nav-items{
+  font-size: large;
   font-weight: bold;
 }
 
@@ -145,7 +168,7 @@ body {
   }
   
   .home-main-section .lady-image {
-    background-image: url(images/landing-page-girl.png);
+    background-image: url(assets/landing-page-girl.png);
     flex-grow: 1;
     max-height: 70vh;
     min-width: 30vw;
