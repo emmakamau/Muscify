@@ -65,8 +65,29 @@ class Upvote(db.Model):
         
     @classmethod
     def query_upvotes(cls, id):
-        upvote = Upvote.query.filter_by(pitch_id=id).all()
+        upvote = Upvote.query.filter_by(album_id=id).all()
         return upvote
     
     def __repr__(self):
         return f'{self.user_id}:{self.album_id}'
+    
+class Downvote(db.Model):
+    __tablename__ = 'downvotes'
+    id = db.Column(db.Integer, primary_key=True)
+    album_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  
+
+    def save_downvote(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def query_downvotes(cls, id):
+        downvote = Downvote.query.filter_by(album_id=id).all()
+        return downvote
+    
+    def __repr__(self):
+        return f'{self.user_id}:{self.album_id}'
+    
+    
