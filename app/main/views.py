@@ -18,4 +18,4 @@ def discover():
 def index():
     allCharts = getchart()
 
-    return render_template('index.html',charts=allCharts)
+    return render_template('charts.html',charts=allCharts)
