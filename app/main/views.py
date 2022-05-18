@@ -41,6 +41,11 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
+@main.route('/contact')
+def contact():
+
+    return render_template('contact.html')
+
 @main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id):
@@ -59,3 +64,19 @@ def new_review(id):
 
     title = f'{album.title} review'
     return render_template('new_review.html',title = title, review_form=form, album=album)
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+    form = UpdateProfile()
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('main.update_profile',uname=user.username))
+
+    return render_template('profile/update.html',form =form)
