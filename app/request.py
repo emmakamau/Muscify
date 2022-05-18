@@ -34,11 +34,29 @@ def process_results_tracks(track_list):
 
 # Get chart data by albums
 def getChartAlbums():
-  album_results = None
-  return album_results
+   getchart_url = base_url
+   with urllib.request.urlopen(getchart_url) as url:
+        get_chart_data = url.read()
+        get_chart_response = json.loads(get_chart_data)
+        get_chart_response_tracks = get_chart_response.get('albums')
+        album_results = None
+        if get_chart_response_tracks['data']:
+            chart_results_list = get_chart_response_tracks['data']
+            album_results = process_results_albums(chart_results_list)
+   return album_results
 
 def process_results_albums(albums_list):
   album_results = []
+  for album in albums_list:
+    id = album.get('id')
+    title = album .get('title')
+    link = album.get('link')
+    artistId = album.get('artist',{}).get('id')
+    artistName = album.get('artist',{}).get('name')
+    albumImage = album.get('album',{}).get('cover_medium')
+
+    album_object = Albums(id,title,link,artistId,artistName,albumImage)
+    album_results.append(album_object)
   return album_results
 
 # Get chart data by podcast

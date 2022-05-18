@@ -1,4 +1,5 @@
 
+from os import link
 from . import db
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_login import UserMixin, current_user
@@ -42,6 +43,15 @@ class Tracks:
         self.artistId = artistId
         self.artistName = artistName
         self.albumId = albumId
+        self.albumImage = albumImage
+
+class Albums:
+    def __init__(self,id, title,link,artistId,artistName,albumImage):
+        self.id = id
+        self.title = title
+        self.link = link
+        self.artistId = artistId
+        self.artistName = artistName
         self.albumImage = albumImage
 
 class Review(db.Model):
