@@ -154,6 +154,16 @@ body {
   background-color:#043c3d;
 }
 
+.page-links{
+  color: white;
+  text-decoration: none;
+}
+
+.page-links:hover{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
 
 /* Homepage */
 .home-main-section {
@@ -274,9 +284,27 @@ body {
     background-color: #202027;
     margin-bottom: 2rem;
   }
-  
+
   .icon img {
     width: 40px;
+  }
+
+  .route-title{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .route-title:hover{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .route-title:focus{
+    color: white;
+    text-decoration: none;
+    text-align: center;
   }
   
   @media (max-width: 800px) {
@@ -400,3 +428,21 @@ body {
   border-radius: 50%;
   background-color: rgb(52, 87, 178, .1);
 } 
+
+/* Track/Artist/Albums display */
+
+.track-display{
+  margin: 0;
+}
+
+.display-card{
+  padding: 2vh;
+}
+
+.card-link{
+  padding: 0 2vw;
+}
+
+.album-image{
+  padding: 1vw;
+}

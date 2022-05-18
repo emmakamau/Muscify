@@ -7,16 +7,28 @@
             <h1 class="title">Discover new music</h1>
             <div class="icon-section">
                 <div class="icon">
-                    <img src="{{url_for('static',filename='/css/assets/microphone.svg')}}">
-                    Charts
+                    <a href="/charts/tracks" class="route-title">
+                        <img src="{{url_for('static',filename='/css/assets/microphone.svg')}}">
+                        <p>Charts</p>
+                    </a>
                 </div>
                 <div class="icon">
-                    <img src="{{url_for('static',filename='/css/assets/albums.svg')}}">
-                    Albums
+                    <a href="/charts/albums" class="route-title">
+                        <img src="{{url_for('static',filename='/css/assets/albums.svg')}}">
+                        <p>Albums</p>
+                    </a>
                 </div>
                 <div class="icon">
-                    <img src="{{url_for('static',filename='/css/assets/more.svg')}}">
-                    More
+                    <a href="/charts/podcast" class="route-title">
+                        <img src="{{url_for('static',filename='/css/assets/podcast.svg')}}">
+                        <p>Podcast</p>
+                    </a>
+                </div>
+                <div class="icon">
+                    <a href="/charts/artist" class="route-title">
+                        <img src="{{url_for('static',filename='/css/assets/artist.svg')}}">
+                        <p>Artist</p>
+                    </a>
                 </div>
             </div>
             By joining you can benefit by listening to the latest albums released.
