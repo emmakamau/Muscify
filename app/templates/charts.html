@@ -1,0 +1,21 @@
+{% extends 'base_muscify.html'%}
+
+{%block content%}
+<div class="row track-display" align="center">
+{% for chart in charts%}
+<div class="col-md-4">
+    <div class="card">
+        <img class="card-img-top" src="{{chart.albumImage}}" alt="album-image">
+        <p><cite title="Source Title">Artist: {{chart.artistName}}</cite></p>
+        <div class="card-body">
+            <h5 class="card-title">Track: {{chart.title}}</h5>
+            <div class="card-body">
+                <a href="{{chart.preview}}" class="card-link page-links">Preview</a>
+                <a href="{{chart.link}}" class="card-link page-links">Listen</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+</div>
+{%endblock%}

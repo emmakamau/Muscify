@@ -154,6 +154,9 @@ body {
   background-color:#043c3d;
 }
 
+.page-links{
+  color: white;
+}
 
 /* Homepage */
 .home-main-section {
@@ -400,3 +403,9 @@ body {
   border-radius: 50%;
   background-color: rgb(52, 87, 178, .1);
 } 
+
+/* Track display */
+
+.track-display{
+  margin: 0;
+}
