@@ -1,9 +1,17 @@
+from flask import render_template,request,redirect,url_for,abort
 from . import main
-from flask import render_template
 from ..request import *
 
-@main.route('/')
-def index():
-    allCharts = getchart()
 
-    return render_template('index.html',charts=allCharts)
+@main.route('/discover')
+def discover():
+   title='Discover'
+
+   return render_template('discover.html',title=title)
+
+@main.route('/charts/tracks')
+def charts():
+    allCharts = getChartTracks()
+
+    return render_template('charts.html',charts=allCharts)
+
