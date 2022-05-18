@@ -119,7 +119,7 @@ body {
 
 .title {
   font-weight: 500;
-  font-size: 3em;
+  font-size: 5em;
   margin-bottom: 1rem;
   margin-top: 0;
 }
@@ -131,12 +131,13 @@ body {
 }
 
 .btn {
-  color:#0ff0fe;
-  background-color:#043c3d;
+  color:#043c3d;
+  background-color:#0ff0fe;
   padding: .75rem 1.5rem;
   border-radius: .5rem;
   text-decoration: none;
-  font-size: .9rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   outline: none;
   border: none;
   cursor: pointer;
@@ -144,6 +145,8 @@ body {
 
 .btn:hover {
   background-color:#043c3d;
+  color: #0ff0fe;
+  border: #0ff0fe solid 2px;
 }
 
 .btn:focus {
@@ -157,6 +160,7 @@ body {
     align-items: stretch;
     justify-content: space-between;
     flex-grow: 1;
+    height: 80vh;
   }
   
   .home-main-section .img-wrapper {
@@ -243,6 +247,7 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-grow: 1;
+    height: 80vh;
   }
   
   .discover-main-section .covers-image {
@@ -292,6 +297,7 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
+  height: 80vh;
 }
 
 .join-text {
