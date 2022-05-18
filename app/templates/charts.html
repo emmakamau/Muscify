@@ -4,9 +4,9 @@
 <div class="row track-display" align="center">
 {% for chart in charts%}
 <div class="col-md-4">
-    <div class="card">
-        <img class="card-img-top" src="{{chart.albumImage}}" alt="album-image">
-        <p><cite title="Source Title">Artist: {{chart.artistName}}</cite></p>
+    <div class="card display-card">
+        <img class="card-img-top album-image" src="{{chart.albumImage}}" alt="album-image">
+        <p><cite title="View Artist">Artist: {{chart.artistName}}</cite></p>
         <div class="card-body">
             <h5 class="card-title">Track: {{chart.title}}</h5>
             <div class="card-body">

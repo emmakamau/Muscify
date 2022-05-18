@@ -25,8 +25,8 @@ def process_results(chart_list):
     artistId = chart.get('artist',{}).get('id')
     artistName = chart.get('artist',{}).get('name')
     artistAlbum = chart.get('album',{}).get('id')
-    albumImage = chart.get('album',{}).get('picture_medium')
-
+    albumImage = chart.get('album',{}).get('cover_medium')
+    
     chart_object = Chart(id,title,link,preview,artistId,artistName,artistAlbum,albumImage)
     chart_results.append(chart_object)
   return chart_results
