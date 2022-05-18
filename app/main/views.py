@@ -1,9 +1,10 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User
-from .forms import UpdateProfile
+from ..request import *
 from flask_login import login_required,current_user
-from .. import db,photos
+from ..models import *
+from .forms import *
+
 @main.route('/')
 def index(): 
    title="Homepage"

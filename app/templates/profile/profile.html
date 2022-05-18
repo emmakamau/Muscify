@@ -36,37 +36,7 @@
           </div> 
      </div>
     </div>  
-</div>              
-     </div>
-      {% if blogs%}   
-      <h3 class="text-center"style="color:green;">Your Blogs are </h3>
-        {% for blog in blogs%}
-       <div class="container" style="background-color:grey;color:bisque">  
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"> {{blog.blog}} </h5>
-            <p class="card-text">{{blog.current_user}}</p>  
-          </div>
-        </div>
-        <a class="btn btn-success" style="margin-top:10px;"href="{{url_for('main.updatedblog',blog_id=blog.id)}}"> Update Blog </a> 
-
-      <a  class="btn btn-danger" style="margin-top:10px;" href="{{url_for('main.deleteBlog',blog_id = blog.id)}}">{{blog.deleteBlog}} Delete Blog </a>
-        {% endfor %} 
-       </div>
-      {% endif%}
+    </div>              
+</div>
     
-        <div class="container" style="margin-top:20px;">
-          <div class="jumbotron">
-            <h3 class="display-4 text-center"> Post A Blog </h3>
-            <p class="lead text-center">Click the button below to add Blogs.</p>
-            <hr class="my-4">
-            <div class="text-center">
-              <a href=" {{url_for('main.write_blog')}} "> <button class="btn btn-success" style="padding: 20px;"> click Me </button></a>
-            </div>
-          </div>
-        </div>
-       
-        <div class="text-center">
-         <a class="btn btn-success" style="margin-top:10px;" href="{{url_for('main.index')}}" role="button">BACK HOME</a>
-        </div> 
 {% endblock %}
