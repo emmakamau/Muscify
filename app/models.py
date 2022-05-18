@@ -53,3 +53,20 @@ class Review(db.Model):
         reviews = Review.query.filter_by(album_id=id).all()
         return reviews
 
+class Upvote(db.Model):
+    __tablename__ = 'upvotes'
+    id = db.Column(db.Integer, primary_key=True)
+    album_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    def save_Upvote(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    @classmethod
+    def query_upvotes(cls, id):
+        upvote = Upvote.query.filter_by(pitch_id=id).all()
+        return upvote
+    
+    def __repr__(self):
+        return f'{self.user_id}:{self.album_id}'
