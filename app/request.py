@@ -51,30 +51,65 @@ def process_results_albums(albums_list):
     id = album.get('id')
     title = album .get('title')
     link = album.get('link')
+    cover_medium = album.get('cover_medium')
     artistId = album.get('artist',{}).get('id')
     artistName = album.get('artist',{}).get('name')
     albumImage = album.get('album',{}).get('cover_medium')
 
-    album_object = Albums(id,title,link,artistId,artistName,albumImage)
+    album_object = Albums(id,title,link,artistId,artistName,albumImage,cover_medium)
     album_results.append(album_object)
   return album_results
 
 # Get chart data by podcast
 def getChartPodcasts():
-  podcast_results = None
+  getchart_url = base_url
+  with urllib.request.urlopen(getchart_url) as url:
+        get_chart_data = url.read()
+        get_chart_response = json.loads(get_chart_data)
+        get_chart_response_tracks = get_chart_response.get('podcasts')
+        podcast_results = None
+        if get_chart_response_tracks['data']:
+            chart_results_list = get_chart_response_tracks['data']
+            podcast_results = process_results_podcast(chart_results_list)
   return podcast_results
 
 def process_results_podcast(podcast_list):
   podcast_results = []
+  for podcast in podcast_list:
+    id = podcast.get('id')
+    title = podcast.get('title')
+    description = podcast.get('description')
+    link = podcast.get('link')
+    picture_medium = podcast.get('picture_medium')
+
+    podcast_object = Podcasts(id,title,description,link,picture_medium)
+    podcast_results.append(podcast_object)
   return podcast_results
 
 
 # Get chart data by artist
 def getChartArtists():
-  artist_results = None
+  getchart_url = base_url
+  with urllib.request.urlopen(getchart_url) as url:
+        get_chart_data = url.read()
+        get_chart_response = json.loads(get_chart_data)
+        get_chart_response_tracks = get_chart_response.get('artists')
+        artist_results = None
+        if get_chart_response_tracks['data']:
+            chart_results_list = get_chart_response_tracks['data']
+            artist_results = process_results_podcast(chart_results_list)
   return artist_results
 
 def process_results_artist(artist_list):
   artist_results = []
+  for artist in artist_list:
+    id = artist.get('id')
+    artistName = artist.get('name')
+    link = artist.get('link')
+    picture_medium = artist.get('picture_medium')
+    title = artist.get('title')
+
+    artist_object = Podcasts(id,artistName,link,picture_medium,title)
+    artist_results.append(artist_object)
   return artist_results
 

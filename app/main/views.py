@@ -33,7 +33,7 @@ def albums():
 def podcasts():
     allPodcasts = getChartPodcasts()
 
-    return render_template('podcasts.html',artists=allPodcasts)
+    return render_template('podcasts.html',podcasts=allPodcasts)
 
 @main.route('/charts/artists')
 def artists():

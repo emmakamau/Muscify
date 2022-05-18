@@ -5,7 +5,7 @@
 {% for album in albums%}
 <div class="col-md-4">
     <div class="card display-card">
-        <img class="card-img-top album-image" src="{{album.albumImage}}" alt="album-image">
+        <img class="card-img-top album-image" src="{{album.cover_medium}}" alt="album-image">
         <p><cite title="View Artist">Artist: {{album.artistName}}</cite></p>
         <div class="card-body">
             <h5 class="card-title">Album: {{album.title}}</h5>
