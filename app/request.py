@@ -42,7 +42,7 @@ def process_results_albums(albums_list):
   return album_results
 
 # Get chart data by podcast
-def getChartPodcast():
+def getChartPodcasts():
   podcast_results = None
   return podcast_results
 
@@ -52,7 +52,7 @@ def process_results_podcast(podcast_list):
 
 
 # Get chart data by artist
-def getChartArtist():
+def getChartArtists():
   artist_results = None
   return artist_results
 
