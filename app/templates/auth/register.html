@@ -1,0 +1,19 @@
+{% extends 'base_muscify.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block content %}
+<section class="join-main-section">
+    <h1 class="join-text">
+        Join the
+        <span class="accent-text">fun.</span>
+    </h1>
+    <!-- Sign Up form -->
+    <div class="join-form">
+        {{wtf.quick_form(registration_form)}}
+    </div>
+</section>
+<div class="join-page-circle-1"></div>
+<div class="join-page-circle-2"></div>
+
+{% include 'footer.html' %}
+{% endblock %}
