@@ -71,6 +71,13 @@ class Artists:
         self.picture_medium = picture_medium
         self.title = title
 
+class Playlists:
+    def __init__(self,id,title,link,picture_medium):
+        self.id = id
+        self.title = title
+        self.link = link
+        self.picture_medium = picture_medium
+
 
 class Review(db.Model):
 

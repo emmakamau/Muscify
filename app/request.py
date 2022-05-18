@@ -113,3 +113,28 @@ def process_results_artist(artist_list):
     artist_results.append(artist_object)
   return artist_results
 
+def getChartPlaylists():
+  getchart_url = base_url
+  with urllib.request.urlopen(getchart_url) as url:
+        get_chart_data = url.read()
+        get_chart_response = json.loads(get_chart_data)
+        get_chart_response_tracks = get_chart_response.get('playlists')
+        playlist_results = None
+        if get_chart_response_tracks['data']:
+            chart_results_list = get_chart_response_tracks['data']
+            playlist_results = process_results_playlist(chart_results_list)
+  return playlist_results
+
+def process_results_playlist(playlist_list):
+  playlist_results = []
+  for playlist in playlist_list:
+    id = playlist.get('id')
+    link = playlist.get('link')
+    picture_medium = playlist.get('picture_medium')
+    title = playlist.get('title')
+
+    playlist_object = Playlists(id,link,picture_medium,title)
+    playlist_results.append(playlist_object)
+  return playlist_results
+
+

@@ -41,6 +41,12 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
+@main.route('/charts/playlists')
+def playlists():
+    allArtists = getChartPlaylists()
+
+    return render_template('playlists.html',playlists=allArtists)
+
 @main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id):
