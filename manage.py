@@ -5,8 +5,8 @@ from app.models import *
 
 # Creating app instance
 app = create_app('development')
-app = create_app('test')
-app = create_app('production')
+# app = create_app('test')
+# app = create_app('production')
 
 manager = Manager(app)
 manager.add_command('server',Server)
@@ -23,7 +23,7 @@ def test():
 
 @manager.shell
 def make_shell_context():
-    return dict(app = app,db = db,User = User,Comment = Comment, Upvote=Upvote,Downvote=Downvote)
+    return dict(app = app,db = db)
 
 if __name__ == '__main__':
     manager.run()
