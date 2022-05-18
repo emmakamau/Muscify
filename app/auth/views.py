@@ -31,6 +31,15 @@ def login():
     title = "Muscify login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
+
+@auth.route('/Profile/<uname>/profile')
+@login_required
+def profile(uname):
+     user = User.query.filter_by(username = uname).first()
+    
+     return render_template('profile/profile.html',user = user)
+
+
 @auth.route('/logout')
 @login_required
 def logout():
