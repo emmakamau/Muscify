@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_login import UserMixin, current_user
 from . import login_manager
+from datetime import datetime
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -9,9 +10,8 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique=True,index=True)
     bio = db.Column(db.String(600),index=True)
     prof_pic = db.Column(db.String())
-    blogs = db.relationship('Blog',backref='user',lazy ='dynamic')
-    comments = db.relationship('Comment',backref='user',lazy ='dynamic')
     password_hash = (db.String(30))
+    reviews = db.relationship('Review',backref = 'user',lazy = "dynamic")
 
     pass_secure=db.Column(db.String(255))
     @property
@@ -32,7 +32,7 @@ class User(UserMixin,db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
     
-class Chart:
+class Tracks:
     def __init__(self,id,title,link,preview,artistId,artistName,albumId,albumImage):
         self.id = id
         self.title = title
@@ -42,3 +42,25 @@ class Chart:
         self.artistName = artistName
         self.albumId = albumId
         self.albumImage = albumImage
+
+class Review(db.Model):
+
+    __tablename__ = 'reviews'
+
+    id = db.Column(db.Integer,primary_key = True)
+    album_id = db.Column(db.Integer)
+    album_title = db.Column(db.String)
+    image_path = db.Column(db.String)
+    album_review = db.Column(db.String)
+    posted = db.Column(db.DateTime,default=datetime.utcnow())
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    
+    def save_review(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_reviews(cls,id):
+        reviews = Review.query.filter_by(album_id=id).all()
+        return reviews
+
