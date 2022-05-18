@@ -2,7 +2,7 @@ from . import db
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_login import UserMixin, current_user
 from . import login_manager
-import datetime
+from datetime import datetime
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -52,7 +52,7 @@ class Review(db.Model):
     album_title = db.Column(db.String)
     image_path = db.Column(db.String)
     album_review = db.Column(db.String)
-    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    posted = db.Column(db.DateTime,default=datetime.utcnow())
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     
     def save_review(self):

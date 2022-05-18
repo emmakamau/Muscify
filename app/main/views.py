@@ -40,6 +40,7 @@ def artists():
     allArtists = getChartArtists()
 
     return render_template('artists.html',artists=allArtists)
+
 @main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id):
