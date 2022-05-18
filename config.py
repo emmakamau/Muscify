@@ -6,6 +6,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:GenZ|0420@localhost/muscify'
     SECRET_KEY = os.environ.get('SECRET_KEY')
     UPLOADED_PHOTOS_DEST ='app/static/photos'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    
     
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
