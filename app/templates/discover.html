@@ -1,0 +1,30 @@
+{% extends 'base_muscify.html' %}
+
+{% block content %}
+<div class="container full-height-grow" id="section-two">
+    <section class="discover-main-section">
+        <div class="call-to-action">
+            <h1 class="title">Discover new music</h1>
+            <div class="icon-section">
+                <div class="icon">
+                    <a href="/charts/tracks" class="route-title">
+                        <img src="{{url_for('static',filename='/css/assets/microphone.svg')}}">
+                        <p>Charts</p> 
+                    </a>
+                </div>
+                <div class="icon">
+                    <img src="{{url_for('static',filename='/css/assets/albums.svg')}}">
+                    Albums
+                </div>
+                <div class="icon">
+                    <img src="{{url_for('static',filename='/css/assets/more.svg')}}">
+                    More
+                </div>
+            </div>
+            By joining you can benefit by listening to the latest albums released.
+        </div>
+        <img class="covers-image" src="{{url_for('static',filename='/css/assets/covers.jpg')}}">
+    </section>
+</div>
+{% include 'footer.html' %}
+{% endblock %}
