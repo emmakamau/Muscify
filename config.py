@@ -4,9 +4,8 @@ import os
 class Config:
     password = os.environ.get('SQL_PASSWORD')
 
-    SQLALCHEMY_DATABASE_URI = ''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:Atara@localhost/muscify'
     SECRET_KEY = os.environ.get('SECRET_KEY')
-
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     
@@ -23,10 +22,11 @@ class ProdConfig(Config):
     pass
 
 class DevConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:Atara@localhost/muscify'
     DEBUG = True
 
 class TestConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = ''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:Atara@localhost/muscify_test'
     pass
 
 config_options = {
