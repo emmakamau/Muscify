@@ -19,3 +19,21 @@ def charts():
     allCharts = getChartTracks()
 
     return render_template('charts.html',charts=allCharts)
+
+@main.route('/charts/albums')
+def albums():
+    allAlbums = getChartAlbums()
+
+    return render_template('albums.html',albums=allAlbums)
+
+@main.route('/charts/podcasts')
+def podcasts():
+    allPodcasts = getChartPodcasts()
+
+    return render_template('podcasts.html',artists=allPodcasts)
+
+@main.route('/charts/artists')
+def artists():
+    allArtists = getChartArtists()
+
+    return render_template('artists.html',artists=allArtists)
