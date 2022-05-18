@@ -14,8 +14,8 @@ def discover():
 
    return render_template('discover.html',title=title)
 
-@main.route('/')
-def index():
+@main.route('/charts')
+def charts():
     allCharts = getchart()
 
     return render_template('charts.html',charts=allCharts)
