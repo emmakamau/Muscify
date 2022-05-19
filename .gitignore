@@ -1,4 +1,6 @@
-start.sh
 virtual/
+.vscode/
 *.pyc
+__pycache__
+start.sh
 migrations/

@@ -7,6 +7,8 @@ from . import login_manager
 from datetime import datetime
 
 class User(UserMixin,db.Model):
+    __tablename__ = 'users'
+
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(128),index=True)
     email = db.Column(db.String(255),unique=True,index=True)
@@ -92,7 +94,7 @@ class Review(db.Model):
     track_id = db.Column(db.Integer)
     track_review = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow())
-    user_id = db.Column(db.Integer,db.ForeignKey("user.id"))
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     
     def save_review(self):
         db.session.add(self)
