@@ -1,12 +1,14 @@
-
 {% extends 'base_muscify.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
- 
-{% block content %} 
 
-<div class="container">
-  {{wtf.quick_form(form)}}
+{% block content %}
+
+<div class="container profile-update">
+  <div class="home-page-circle-1"></div>
+  <div class="profile-home">
+    {{wtf.quick_form(form)}}
+  </div>
+  <div class="home-page-circle-3"></div>
 </div>
 {% endblock %}
-

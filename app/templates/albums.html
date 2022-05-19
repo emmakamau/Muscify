@@ -18,17 +18,17 @@
         <h4>Tracks:</h4>
         <div class="row">
             {% for track in album.tracklist %}
-                <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-xs-6">
-                    <a href="/charts/tracks/{{track.id}}">
-                        <p class="card-title page-links" title="Listen to track">{{track.title}}</p>
-                    </a>
-                </div>
+            <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-xs-6">
+                <a href="/charts/tracks/{{track.id}}">
+                    <p class="card-title page-links" title="Listen to track">{{track.title}}</p>
+                </a>
+            </div>
             {% endfor %}
         </div>
     </div>
     <div class="col-md-1"></div>
 </div>
+
 <hr>
 {%endfor%}
-
 {%endblock%}
