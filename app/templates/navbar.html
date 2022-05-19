@@ -7,7 +7,7 @@
         <ul>
             <li><a href="/discover" class="nav-items">Discover</a></li>
             {% if current_user.is_authenticated %}
-            <li class="nav-items">Hi, {{current_user.username|capitalize()}}</li>
+            <!-- <li class="nav-items">Hi, {{current_user.username|capitalize()}}</li> -->
             <li><a href="{{url_for('auth.profile',uname=current_user.username,userid=current_user.id)}}" class="nav-items">Profile</a></li>
             <li><a href="{{url_for('auth.logout')}}" class="nav-items">SignOut</a></li>
             {% else %}

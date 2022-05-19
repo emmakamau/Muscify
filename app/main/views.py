@@ -68,9 +68,9 @@ def profile(userid,uname):
    return render_template("profile/profile.html", title = title, reviews=reviews,user=user)
 
 
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@main.route('/user/<userid>/<uname>/update',methods = ['GET','POST'])
 @login_required
-def update_profile(uname):
+def update_profile(uname,userid):
     user = User.query.filter_by(username = uname).first()
     if user is None:
         abort(404)
@@ -80,7 +80,7 @@ def update_profile(uname):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('main.update_profile',uname=user.username))
+        return redirect(url_for('main.profile',uname=user.username,userid=user.id))
 
     return render_template('profile/update.html',form =form)
 

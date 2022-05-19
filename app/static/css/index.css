@@ -461,4 +461,6 @@ body {
   overflow: hidden;
 }
 
-
+.profile-pic{
+  border-radius: 50%;
+}

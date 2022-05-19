@@ -2,10 +2,59 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
+<div class="container profile-page">
+  <div class="row">
+    <!-- displaying  Username-->
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div class="display-user-profile">
+        <div class="profile-picture">
+          {% if user.prof_pic %}
+          <img src="{{url_for('static',filename=user.prof_pic)}}" alt="user-profile-pic"
+            class="img-thumbnail profile-pic" id="prof-pic" title="Profile picture">
+          {%else%}
+          <p>No profile picture</p>
+          {% endif %}
+          <br><br>
+          <div class="update-prof-pic" id="update-prof-pic">
+            {% if user == current_user %}
+            <form action="{{url_for('main.update_pic',uname=user.username,userid=user.id)}}" method="post"
+              enctype="multipart/form-data">
+              <input type="file" name="photo" class="form-control" required>
+              <br>
+              <input type="submit" class="btn">
+            </form>
+            {% endif %}
+          </div>
+        </div>
+        <div class="profile-details">
+          <h3> {{user.username| capitalize}} </h3>
+          <!--Displaying user bio-->
+          {% if user.bio %}
+          <p> {{user.bio}}</p>
+          {%else%}
+          <p> {{user.username| capitalize}} has no bio </p>
+          {% endif %}
+        </div>
+        {% if user == current_user %}
+        <a class="page-links" href="{{url_for('main.update_profile',uname=user.username,userid=user.id)}}">Edit
+          profile</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6 display-user-reviews"></div>
+  </div>
+</div>
+{% endblock %}
+
+
+<!-- 
+
 <div class="container user-profile">
   <div class="container">
-    <div style="width:50%;">
-      <h3 class="text-center" style="color:white;"> {{user.username| capitalize}} </h3>
+    <div>
+      <h3 class="text-center"> {{user.username| capitalize}} </h3>
       {% if user.bio %}
       <p> {{user.bio}}</p>
       {%else%}
@@ -14,7 +63,7 @@
     </div>
   </div>
   <div class="container">
-    <div style="width:50%">
+    <div>
       {% if user.profile_pic_path %}
       <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
       {%else%}
@@ -39,4 +88,4 @@
   </div>
 </div>
 
-{% endblock %}
+-->
