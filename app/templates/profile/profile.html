@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="container" style="background-color:rgb(21, 156, 124);">
+    <div class="container">
+        <div style="width:50%;">
+          <h3 class="text-center" style="color:white;"> {{user.username| capitalize}} </h3>
+          {% if user.bio %}
+            <p> {{user.bio}}</p>
+          {%else%}
+            <p> {{user.username| capitalize}} has no bio </p>
+          {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        <div style="width:50%">
+          {% if user.profile_pic_path %}
+             <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+          {%else%}
+             <p> No profile picture</p>
+          {% endif %}
+
+        {% if user == current_user %}
+            <a class="edit"href="{{url_for('main.update_profile',uname=user.username)}}"> Edit profile </a>
+        {% endif %}
+          <div class="container">
+            <div class="col-md-4">
+          {% if user == current_user %}
+            <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
+              <input type="file"  name="photo" class="form-control" required>
+              <input type="submit">
+            </form>
+          {% endif %}
+          </div> 
+     </div>
+    </div>  
+    </div>              
+</div>
+    
+{% endblock %}

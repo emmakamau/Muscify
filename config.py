@@ -4,7 +4,7 @@ import os
 class Config:
     password = os.environ.get('SQL_PASSWORD')
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorraine:gift1234@localhost/muscify'
+    SQLALCHEMY_DATABASE_URI = ''
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
     UPLOADED_PHOTOS_DEST ='app/static/photos'
@@ -19,17 +19,13 @@ class Config:
 
 class ProdConfig(Config):
     #SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").replace("postgres://", "postgresql://", 1)
-
     pass
 
 class DevConfig(Config):
     DEBUG = True
 
 class TestConfig(Config):
-
-    # password = os.environ.get('SQL_PASSWORD')
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:GenZ|0420@localhost/muscify_test'
-
+    # SQLALCHEMY_DATABASE_URI = ''
     pass
 
 config_options = {
