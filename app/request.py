@@ -74,7 +74,6 @@ def getTracksForAlbums(albumsId):
       track_results = process_results_tracks(chart_results_list)
   return track_results
 
-
 # Get chart data by podcast
 def getChartPodcasts():
   getchart_url = base_url
@@ -123,10 +122,26 @@ def process_results_artist(artist_list):
     link = artist.get('link')
     picture_medium = artist.get('picture_medium')
     title = artist.get('title')
+    tracklist = getTracksForArtists(id)
+    picture_big = artist.get('picture_big')
     
-    artist_object = Artists(id,artistName,link,picture_medium,title)
+    print(tracklist)
+    artist_object = Artists(id,artistName,link,picture_medium,title,tracklist,picture_big)
     artist_results.append(artist_object)
   return artist_results
+
+def getTracksForArtists(artistId):
+  
+  get_artist_tracks_url = 'https://api.deezer.com/artist/{}/top?limit=50'.format(artistId)
+  with urllib.request.urlopen(get_artist_tracks_url) as url:
+    get_chart_data = url.read()
+    get_chart_response = json.loads(get_chart_data)
+    track_results = None
+    if get_chart_response['data']:
+      chart_results_list = get_chart_response['data']
+      track_results = process_results_tracks(chart_results_list)
+    print(track_results)
+  return track_results
 
 
 def getTrack(trackId):

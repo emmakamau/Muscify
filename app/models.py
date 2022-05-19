@@ -67,12 +67,14 @@ class Podcasts:
         self.picture_medium = picture_medium
 
 class Artists:
-    def __init__(self,id,artistName,link,picture_medium,title):
+    def __init__(self,id,artistName,link,picture_medium,title,tracklist,picture_big):
         self.id = id
         self.artistName = artistName
         self.link = link
         self.picture_medium = picture_medium
         self.title = title
+        self.tracklist = tracklist
+        self.picture_big = picture_big
 
 class Playlists:
     def __init__(self,id,title,link,picture_medium):

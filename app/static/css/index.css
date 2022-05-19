@@ -489,6 +489,10 @@ hr{
   color: #0ff0fe;
 }
 
+.tracklist-display-main{
+  padding:0 1vw;
+}
+
 /* User profile */
 .user-profile{
   overflow: hidden;
