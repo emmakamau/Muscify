@@ -8,7 +8,7 @@
         <img class="card-img-top album-image" src="{{podcast.picture_medium}}" alt="podcast-image">
         <h5><cite title="View Artist">Title: {{podcast.title}}</cite></h5>
         <div class="card-body">
-            <p class="card-title">Description: {{podcast.description}}</p>
+            <p class="card-title">Description: {{podcast.description|truncate(150)}}</p>
             <div class="card-body">
                 <a href="{{podcast.link}}" class="card-link page-links">Listen</a>
             </div>
