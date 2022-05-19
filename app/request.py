@@ -26,12 +26,11 @@ def process_results_tracks(track_list):
     artistId = chart.get('artist',{}).get('id')
     artistName = chart.get('artist',{}).get('name')
     artistAlbum = chart.get('album',{}).get('id')
-    md5_image = chart.get('md5_image')
     albumImageSmall = chart.get('album',{}).get('cover_small')
     albumImageMedium = chart.get('album',{}).get('cover_medium')
     albumImageLarge = chart.get('album',{}).get('cover_big')
     
-    chart_object = Tracks(id,title,link,md5_image,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
+    chart_object = Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
     track_results.append(chart_object)
   return track_results
 
@@ -144,7 +143,6 @@ def getTrack(trackId):
       title = track_details_response.get('title')
       link = track_details_response.get('link')
       preview = track_details_response.get('preview')
-      md5_image = track_details_response.get('md5_image')
       artistId = track_details_response.get('artist',{}).get('id')
       artistName = track_details_response.get('artist',{}).get('name')
       artistAlbum = track_details_response.get('album',{}).get('name')
@@ -152,7 +150,8 @@ def getTrack(trackId):
       albumImageMedium = track_details_response.get('album',{}).get('cover_medium')
       albumImageLarge = track_details_response.get('album',{}).get('cover_big')
 
-      track_object= Tracks(id,title,md5_image,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
+      print(link)
+      track_object= Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
   return track_object
 
 # def getChartPlaylists():

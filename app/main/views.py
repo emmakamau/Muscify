@@ -66,6 +66,7 @@ def albums_tracks(albumid):
     return render_template('album-detail.html',albums=albums)
 
 @main.route('/user/<userid>/<uname>')
+@login_required
 def profile(userid,uname):
    user = User.query.filter_by(username = uname).first()
    title='User Profile'

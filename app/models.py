@@ -35,12 +35,11 @@ def load_user(user_id):
     return User.query.get(int(user_id))
     
 class Tracks:
-    def __init__(self,id,title,link,preview,md5_image,artistId,artistName,albumId,albumImageSmall,albumImageMedium,albumImageLarge):
+    def __init__(self,id,title,link,preview,artistId,artistName,albumId,albumImageSmall,albumImageMedium,albumImageLarge):
         self.id = id
         self.title = title
         self.link = link
         self.preview = preview
-        self.md5_image = md5_image
         self.artistId = artistId
         self.artistName = artistName
         self.albumId = albumId
