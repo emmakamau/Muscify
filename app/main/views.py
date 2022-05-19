@@ -4,6 +4,7 @@ from ..request import *
 from flask_login import login_required,current_user
 from ..models import *
 from .forms import *
+from .. import db, photos
 
 @main.route('/')
 def index(): 
@@ -33,7 +34,7 @@ def albums():
 def podcasts():
     allPodcasts = getChartPodcasts()
 
-    return render_template('podcasts.html',artists=allPodcasts)
+    return render_template('podcasts.html',podcasts=allPodcasts)
 
 @main.route('/charts/artists')
 def artists():
@@ -41,33 +42,36 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
-@main.route('/contact')
-def contact():
 
-    return render_template('contact.html')
-
-@main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
+@main.route('/charts/tracks/<trackId>', methods = ['GET','POST'])
 @login_required
-def new_review(id):
-    form = ReviewForm()
-    album = get_album(id)#assumed there is a model class album with properties including id,cover_medium from the api,also assumed there is a method called get_album in requests.py
-    if form.validate_on_submit():
-        title = form.title.data
-        review = form.review.data
+def track(trackId):
+    track = getTrack(trackId)
+    review_form = ReviewForm()
+    reviews = Review.get_reviews(trackId)
+    if review_form.validate_on_submit():
+        review = review_form.review.data
 
         # Updated review instance
-        new_review = Review(album_id=album.id,album_title=title,image_path=album.cover_medium,album_review=review,user=current_user)
-
-        # save review method
+        new_review = Review(track_id=track.id,track_review=review,user=current_user)
         new_review.save_review()
-        return redirect(url_for('.album',id = album.id ))
+        return redirect('/charts/tracks/{track_id}'.format(track_id=trackId))
+    return render_template('charts-detail.html',track=track,reviews=reviews,review_form=review_form)
 
-    title = f'{album.title} review'
-    return render_template('new_review.html',title = title, review_form=form, album=album)
+@main.route('/user/<userid>/<uname>')
+def profile(userid,uname):
+   user = User.query.filter_by(username = uname).first()
+   title='User Profile'
+   reviews = Review.get_reviews_by_user(userid)
+   
+   if user is None:
+      abort(404)
+   return render_template("profile/profile.html", title = title,reviews=reviews,user=user)
 
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
+
+@main.route('/user/<userid>/<uname>/update',methods = ['GET','POST'])
 @login_required
-def update_profile(uname):
+def update_profile(uname,userid):
     user = User.query.filter_by(username = uname).first()
     if user is None:
         abort(404)
@@ -77,6 +81,23 @@ def update_profile(uname):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('main.update_profile',uname=user.username))
+        return redirect(url_for('main.profile',uname=user.username,userid=user.id))
 
     return render_template('profile/update.html',form =form)
+
+@main.route('/user/<userid>/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname,userid):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.prof_pic = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname,userid=userid))
+
+# @main.route('/charts/playlists')
+# def playlists():
+#     allArtists = getChartPlaylists()
+
+#     return render_template('playlists.html',playlists=allArtists)

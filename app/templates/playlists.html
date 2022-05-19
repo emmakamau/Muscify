@@ -1,0 +1,19 @@
+{% extends 'base_muscify.html'%}
+
+{%block content%}
+<div class="row track-display" align="center">
+{% for playlist in playlists%}
+<div class="col-md-4">
+    <div class="card display-card">
+        <img class="card-img-top album-image" src="{{playlist.picture_medium}}" alt="playlist-image">
+        <div class="card-body">
+            <h5 class="card-title">Title: {{playlist.title}}</h5>
+            <div class="card-body">
+                <a href="{{playlist.link}}" class="card-link page-links">Listen</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+</div>
+{%endblock%}
