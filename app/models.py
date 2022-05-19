@@ -35,11 +35,12 @@ def load_user(user_id):
     return User.query.get(int(user_id))
     
 class Tracks:
-    def __init__(self,id,title,link,preview,artistId,artistName,albumId,albumImageSmall,albumImageMedium,albumImageLarge):
+    def __init__(self,id,title,link,preview,md5_image,artistId,artistName,albumId,albumImageSmall,albumImageMedium,albumImageLarge):
         self.id = id
         self.title = title
         self.link = link
         self.preview = preview
+        self.md5_image = md5_image
         self.artistId = artistId
         self.artistName = artistName
         self.albumId = albumId
@@ -48,14 +49,15 @@ class Tracks:
         self.albumImageLarge = albumImageLarge
 
 class Albums:
-    def __init__(self,id, title,link,artistId,artistName,albumImage,cover_medium):
+    def __init__(self,id, title,link,artistId,artistName,cover_medium,cover_big,tracklist):
         self.id = id
         self.title = title
         self.link = link
         self.artistId = artistId
         self.artistName = artistName
-        self.albumImage = albumImage
         self.cover_medium = cover_medium
+        self.cover_big = cover_big
+        self.tracklist = tracklist
 
 class Podcasts:
     def __init__(self,id,title,description,link,picture_medium):

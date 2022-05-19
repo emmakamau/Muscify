@@ -26,26 +26,27 @@ def process_results_tracks(track_list):
     artistId = chart.get('artist',{}).get('id')
     artistName = chart.get('artist',{}).get('name')
     artistAlbum = chart.get('album',{}).get('id')
+    md5_image = chart.get('md5_image')
     albumImageSmall = chart.get('album',{}).get('cover_small')
     albumImageMedium = chart.get('album',{}).get('cover_medium')
     albumImageLarge = chart.get('album',{}).get('cover_big')
     
-    chart_object = Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
+    chart_object = Tracks(id,title,link,md5_image,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
     track_results.append(chart_object)
   return track_results
 
 # Get chart data by albums
 def getChartAlbums():
-   getchart_url = base_url
-   with urllib.request.urlopen(getchart_url) as url:
-        get_chart_data = url.read()
-        get_chart_response = json.loads(get_chart_data)
-        get_chart_response_tracks = get_chart_response.get('albums')
-        album_results = None
-        if get_chart_response_tracks['data']:
-            chart_results_list = get_chart_response_tracks['data']
-            album_results = process_results_albums(chart_results_list)
-   return album_results
+  getchart_url = base_url
+  with urllib.request.urlopen(getchart_url) as url:
+    get_chart_data = url.read()
+    get_chart_response = json.loads(get_chart_data)
+    get_chart_response_tracks = get_chart_response.get('albums')
+    album_results = None
+    if get_chart_response_tracks['data']:
+      chart_results_list = get_chart_response_tracks['data']
+      album_results = process_results_albums(chart_results_list)
+  return album_results
 
 def process_results_albums(albums_list):
   album_results = []
@@ -53,14 +54,27 @@ def process_results_albums(albums_list):
     id = album.get('id')
     title = album .get('title')
     link = album.get('link')
-    cover_medium = album.get('cover_medium')
     artistId = album.get('artist',{}).get('id')
     artistName = album.get('artist',{}).get('name')
-    albumImage = album.get('album',{}).get('cover_medium')
+    cover_medium = album.get('cover_medium')
+    cover_big = album.get('cover_big')
+    tracklist = getTracksForAlbums(id)
 
-    album_object = Albums(id,title,link,artistId,artistName,albumImage,cover_medium)
+    album_object = Albums(id,title,link,artistId,artistName,cover_medium,cover_big,tracklist)
     album_results.append(album_object)
   return album_results
+
+def getTracksForAlbums(albumsId):
+  get_album_tracks_url = 'https://api.deezer.com/album/{}/tracks'.format(albumsId)
+  with urllib.request.urlopen(get_album_tracks_url) as url:
+    get_chart_data = url.read()
+    get_chart_response = json.loads(get_chart_data)
+    track_results = None
+    if get_chart_response['data']:
+      chart_results_list = get_chart_response['data']
+      track_results = process_results_tracks(chart_results_list)
+  return track_results
+
 
 # Get chart data by podcast
 def getChartPodcasts():
@@ -71,8 +85,8 @@ def getChartPodcasts():
         get_chart_response_tracks = get_chart_response.get('podcasts')
         podcast_results = None
         if get_chart_response_tracks['data']:
-            chart_results_list = get_chart_response_tracks['data']
-            podcast_results = process_results_podcast(chart_results_list)
+          chart_results_list = get_chart_response_tracks['data']
+          podcast_results = process_results_podcast(chart_results_list)
   return podcast_results
 
 def process_results_podcast(podcast_list):
@@ -130,6 +144,7 @@ def getTrack(trackId):
       title = track_details_response.get('title')
       link = track_details_response.get('link')
       preview = track_details_response.get('preview')
+      md5_image = track_details_response.get('md5_image')
       artistId = track_details_response.get('artist',{}).get('id')
       artistName = track_details_response.get('artist',{}).get('name')
       artistAlbum = track_details_response.get('album',{}).get('name')
@@ -137,7 +152,7 @@ def getTrack(trackId):
       albumImageMedium = track_details_response.get('album',{}).get('cover_medium')
       albumImageLarge = track_details_response.get('album',{}).get('cover_big')
 
-      track_object= Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
+      track_object= Tracks(id,title,md5_image,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
   return track_object
 
 # def getChartPlaylists():
