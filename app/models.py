@@ -48,14 +48,15 @@ class Tracks:
         self.albumImageLarge = albumImageLarge
 
 class Albums:
-    def __init__(self,id, title,link,artistId,artistName,albumImage,cover_medium):
+    def __init__(self,id, title,link,artistId,artistName,cover_medium,cover_big,tracklist):
         self.id = id
         self.title = title
         self.link = link
         self.artistId = artistId
         self.artistName = artistName
-        self.albumImage = albumImage
         self.cover_medium = cover_medium
+        self.cover_big = cover_big
+        self.tracklist = tracklist
 
 class Podcasts:
     def __init__(self,id,title,description,link,picture_medium):

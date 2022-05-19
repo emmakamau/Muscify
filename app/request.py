@@ -49,18 +49,36 @@ def getChartAlbums():
 
 def process_results_albums(albums_list):
   album_results = []
+  tracklist = []
   for album in albums_list:
     id = album.get('id')
     title = album .get('title')
     link = album.get('link')
-    cover_medium = album.get('cover_medium')
     artistId = album.get('artist',{}).get('id')
     artistName = album.get('artist',{}).get('name')
-    albumImage = album.get('album',{}).get('cover_medium')
-
-    album_object = Albums(id,title,link,artistId,artistName,albumImage,cover_medium)
+    cover_medium = album.get('cover_medium')
+    cover_big = album.get('cover_big')
+    tracklist = getTracksForAlbums(albums_list)
+    
+    album_object = Albums(id,title,link,artistId,artistName,cover_medium,cover_big,tracklist)
     album_results.append(album_object)
   return album_results
+
+def getTracksForAlbums(albums_list):
+  tracklist_items_list = []
+  for album in albums_list:
+    tracklist_items = album.get('tracklist')
+    tracklist_items_list.append(tracklist_items)
+    for track_url in tracklist_items_list:
+      with urllib.request.urlopen(track_url) as url:
+        get_chart_data = url.read()
+        get_chart_response = json.loads(get_chart_data)
+        track_results = None
+        if get_chart_response['data']:
+            chart_results_list = get_chart_response['data']
+            track_results = process_results_tracks(chart_results_list)
+      return track_results
+
 
 # Get chart data by podcast
 def getChartPodcasts():
