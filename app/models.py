@@ -1,3 +1,5 @@
+
+from os import link
 from . import db
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_login import UserMixin, current_user
@@ -42,6 +44,40 @@ class Tracks:
         self.artistName = artistName
         self.albumId = albumId
         self.albumImage = albumImage
+
+class Albums:
+    def __init__(self,id, title,link,artistId,artistName,albumImage,cover_medium):
+        self.id = id
+        self.title = title
+        self.link = link
+        self.artistId = artistId
+        self.artistName = artistName
+        self.albumImage = albumImage
+        self.cover_medium = cover_medium
+
+class Podcasts:
+    def __init__(self,id,title,description,link,picture_medium):
+        self.id = id
+        self.title = title
+        self.description = description
+        self.link = link
+        self.picture_medium = picture_medium
+
+class Artists:
+    def __init__(self,id,artistName,link,picture_medium,title):
+        self.id = id
+        self.artistName = artistName
+        self.link = link
+        self.picture_medium = picture_medium
+        self.title = title
+
+class Playlists:
+    def __init__(self,id,title,link,picture_medium):
+        self.id = id
+        self.title = title
+        self.link = link
+        self.picture_medium = picture_medium
+
 
 class Review(db.Model):
 

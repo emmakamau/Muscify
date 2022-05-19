@@ -33,7 +33,7 @@ def albums():
 def podcasts():
     allPodcasts = getChartPodcasts()
 
-    return render_template('podcasts.html',artists=allPodcasts)
+    return render_template('podcasts.html',podcasts=allPodcasts)
 
 @main.route('/charts/artists')
 def artists():
@@ -41,10 +41,11 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
-@main.route('/contact')
-def contact():
+@main.route('/charts/playlists')
+def playlists():
+    allArtists = getChartPlaylists()
 
-    return render_template('contact.html')
+    return render_template('playlists.html',playlists=allArtists)
 
 @main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
