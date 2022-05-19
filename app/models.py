@@ -85,10 +85,9 @@ class Review(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     track_id = db.Column(db.Integer)
-    image_path = db.Column(db.String)
     track_review = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow())
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer,db.ForeignKey("user.id"))
     
     def save_review(self):
         db.session.add(self)
@@ -96,6 +95,6 @@ class Review(db.Model):
 
     @classmethod
     def get_reviews(cls,id):
-        reviews = Review.query.filter_by(album_id=id).all()
+        reviews = Review.query.filter_by(track_id=id).all()
         return reviews
 

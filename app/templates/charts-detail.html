@@ -18,7 +18,19 @@
             </div>
         </div>
         <div class="col-md-5">
-            {{ wtf.quick_form(review_form) }}
+            <div class="review-form">
+                {{ wtf.quick_form(review_form) }}
+            </div>
+            <div class="reviews-display">
+                <h5>Track Reviews</h5>
+                {% if reviews %}
+                {% for review in reviews %}
+                <p>{{review.track_review}}</p>
+                {% endfor %}
+                {% else %}
+                <p>No reviews for this track yet.</p>
+                {% endif %}
+            </div>
         </div>
         <div class="col-md-1"></div>
     </div>

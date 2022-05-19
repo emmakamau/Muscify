@@ -6,21 +6,13 @@
     <nav class="main-nav">
         <ul>
             <li><a href="/discover" class="nav-items">Discover</a></li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-items">Hi, {{current_user.username|capitalize()}}</li>
+            <li><a href="{{url_for('auth.profile',uname=current_user.username,userid=current_user.id)}}" class="nav-items">Profile</a></li>
+            <li><a href="{{url_for('auth.logout')}}" class="nav-items">SignOut</a></li>
+            {% else %}
             <li><a href="/authenticate/login" class="nav-items">SignIn</a></li>
             <li><a href="/authenticate/register" class="nav-items">Join</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            {% if current_user.is_authenticated %}     
-              <li class="nav-item">
-                  <a  class="nav-link" href="{{url_for('auth.profile',uname=current_user.username)}}">
-                  <button class="btn"> Profile </button></a>
-             </li>   
-             <li style="color:white;">{{current_user.username}}</li>
-             
-              <li class="nav-item">
-                <a class="nav-link " href="{{url_for('auth.logout')}}">
-                <button class="btn" style="margin-left:20px;"> LogOut</button></a>
-              </li>
             {% endif %}
         </ul>
     </nav>

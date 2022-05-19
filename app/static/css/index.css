@@ -446,3 +446,19 @@ body {
 .album-image{
   padding: 1vw;
 }
+
+/* Display track details */
+.display-track-detail{
+  overflow: hidden;
+}
+
+.reviews-display{
+  margin-top: 4vh;
+}
+
+/* User profile */
+.user-profile{
+  overflow: hidden;
+}
+
+

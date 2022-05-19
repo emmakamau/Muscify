@@ -4,6 +4,7 @@ from ..request import *
 from flask_login import login_required,current_user
 from ..models import *
 from .forms import *
+from .. import db, photos
 
 @main.route('/')
 def index(): 
@@ -43,39 +44,29 @@ def artists():
 
 
 @main.route('/charts/tracks/<trackId>', methods = ['GET','POST'])
+@login_required
 def track(trackId):
     track = getTrack(trackId)
     review_form = ReviewForm()
     reviews = Review.get_reviews(trackId)
     if review_form.validate_on_submit():
-        title = review_form.title.data
         review = review_form.review.data
 
         # Updated review instance
-        new_review = Review(track_id=track.id,image_path=track.cover_medium,track_review=review,user=current_user)
+        new_review = Review(track_id=track.id,track_review=review,user=current_user)
         new_review.save_review()
-        return redirect('/tracks/{track_id}'.format(track_id=trackId))
+        return redirect('/charts/tracks/{track_id}'.format(track_id=trackId))
     return render_template('charts-detail.html',track=track,reviews=reviews,review_form=review_form)
 
+@main.route('/user/<userid>/<uname>')
+def profile(userid,uname):
+   user = User.query.filter_by(username = uname).first()
+   title='User Profile'
+   reviews = Review.get_reviews(userid)
+   if user is None:
+      abort(404)
+   return render_template("profile/profile.html", title = title, reviews=reviews,user=user)
 
-# @main.route('/discover/track/review/new/<int:id>', methods = ['GET','POST'])
-# @login_required
-# def new_review(id):
-#     form = ReviewForm()
-#     track = getTrack(id)
-#     if form.validate_on_submit():
-#         title = form.title.data
-#         review = form.review.data
-
-#         # Updated review instance
-#         new_review = Review(track_id=track.id,album_title=title,image_path=track.cover_big,track_review=review,user=current_user)
-
-#         # save review method
-#         new_review.save_review()
-#         return redirect(url_for('.album',id = album.id ))
-
-#     title = f'{album.title} review'
-#     return render_template('new_review.html',title = title, review_form=form, album=album)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -93,6 +84,16 @@ def update_profile(uname):
 
     return render_template('profile/update.html',form =form)
 
+@main.route('/user/<userid>/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname,userid):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.prof_pic = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname,userid=userid))
 
 # @main.route('/charts/playlists')
 # def playlists():

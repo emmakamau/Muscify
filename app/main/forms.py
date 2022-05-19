@@ -7,6 +7,5 @@ class UpdateProfile(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    title = StringField('Review title',validators=[InputRequired()])
     review = TextAreaField('Album review')
     submit = SubmitField('Submit')
