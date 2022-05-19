@@ -41,30 +41,41 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
-@main.route('/charts/playlists')
-def playlists():
-    allArtists = getChartPlaylists()
 
-    return render_template('playlists.html',playlists=allArtists)
-
-@main.route('/discover/album/review/new/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_review(id):
-    form = ReviewForm()
-    album = get_album(id)#assumed there is a model class album with properties including id,cover_medium from the api,also assumed there is a method called get_album in requests.py
-    if form.validate_on_submit():
-        title = form.title.data
-        review = form.review.data
+@main.route('/charts/tracks/<trackId>', methods = ['GET','POST'])
+def track(trackId):
+    track = getTrack(trackId)
+    review_form = ReviewForm()
+    reviews = Review.get_reviews(trackId)
+    if review_form.validate_on_submit():
+        title = review_form.title.data
+        review = review_form.review.data
 
         # Updated review instance
-        new_review = Review(album_id=album.id,album_title=title,image_path=album.cover_medium,album_review=review,user=current_user)
-
-        # save review method
+        new_review = Review(track_id=track.id,image_path=track.cover_medium,track_review=review,user=current_user)
         new_review.save_review()
-        return redirect(url_for('.album',id = album.id ))
+        return redirect('/tracks/{track_id}'.format(track_id=trackId))
+    return render_template('charts-detail.html',track=track,reviews=reviews,review_form=review_form)
 
-    title = f'{album.title} review'
-    return render_template('new_review.html',title = title, review_form=form, album=album)
+
+# @main.route('/discover/track/review/new/<int:id>', methods = ['GET','POST'])
+# @login_required
+# def new_review(id):
+#     form = ReviewForm()
+#     track = getTrack(id)
+#     if form.validate_on_submit():
+#         title = form.title.data
+#         review = form.review.data
+
+#         # Updated review instance
+#         new_review = Review(track_id=track.id,album_title=title,image_path=track.cover_big,track_review=review,user=current_user)
+
+#         # save review method
+#         new_review.save_review()
+#         return redirect(url_for('.album',id = album.id ))
+
+#     title = f'{album.title} review'
+#     return render_template('new_review.html',title = title, review_form=form, album=album)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -81,3 +92,10 @@ def update_profile(uname):
         return redirect(url_for('main.update_profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
+
+# @main.route('/charts/playlists')
+# def playlists():
+#     allArtists = getChartPlaylists()
+
+#     return render_template('playlists.html',playlists=allArtists)

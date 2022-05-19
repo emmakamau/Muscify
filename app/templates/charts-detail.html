@@ -1,0 +1,26 @@
+{% extends 'base_muscify.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="display-track-detail">
+    <div class="row">
+        <!-- id,title,link,preview,artistId,artistName,artistAlbum,albumImage -->
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <img src="{{track.albumImage}}" alt="" srcset="">
+            <div class="track-detail">
+                <p><cite title="View Artist">Artist: {{track.artistName}}</cite></p>
+                <h5 class="card-title">Track: {{track.title}}</h5>
+                <div class="card-body">
+                    <a href="{{track.preview}}" class="card-link page-links">Preview</a>
+                    <a href="{{track.link}}" class="card-link page-links">Listen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            {{ wtf.quick_form(review_form) }}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+{% endblock %}

@@ -113,6 +113,29 @@ def process_results_artist(artist_list):
     artist_results.append(artist_object)
   return artist_results
 
+
+def getTrack(trackId):
+  get_track_url = 'https://api.deezer.com/track/{}'.format(trackId)
+
+  with urllib.request.urlopen(get_track_url) as url:
+    track_details_data = url.read()
+    track_details_response = json.loads(track_details_data)
+
+    track_object = None
+
+    if track_details_response:
+      id = track_details_response.get('id')
+      title = track_details_response.get('title')
+      link = track_details_response.get('link')
+      preview = track_details_response.get('preview')
+      artistId = track_details_response.get('artist',{}).get('id')
+      artistName = track_details_response.get('artist',{}).get('name')
+      artistAlbum = track_details_response.get('album',{}).get('name')
+      albumImage = track_details_response.get('album',{}).get('cover_medium')
+
+      track_object= Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImage)
+  return track_object
+
 # def getChartPlaylists():
 #   getchart_url = base_url
 #   with urllib.request.urlopen(getchart_url) as url:

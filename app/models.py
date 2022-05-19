@@ -84,10 +84,9 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer,primary_key = True)
-    album_id = db.Column(db.Integer)
-    album_title = db.Column(db.String)
+    track_id = db.Column(db.Integer)
     image_path = db.Column(db.String)
-    album_review = db.Column(db.String)
+    track_review = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow())
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     
