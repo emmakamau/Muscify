@@ -91,7 +91,7 @@ class Review(db.Model):
     track_id = db.Column(db.Integer)
     track_review = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow())
-    user_id = db.Column(db.Integer,db.ForeignKey("user.id"))
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     
     def save_review(self):
         db.session.add(self)
