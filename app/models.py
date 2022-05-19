@@ -5,6 +5,7 @@ from . import login_manager
 from datetime import datetime
 
 class User(UserMixin,db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(128),index=True)
     email = db.Column(db.String(255),unique=True,index=True)
@@ -12,6 +13,8 @@ class User(UserMixin,db.Model):
     prof_pic = db.Column(db.String())
     password_hash = (db.String(30))
     reviews = db.relationship('Review',backref = 'user',lazy = "dynamic")
+    upvote = db.relationship('Upvote',backref='user',lazy='dynamic')
+    downvote = db.relationship('Downvote',backref='user',lazy='dynamic')
 
     pass_secure=db.Column(db.String(255))
     @property
