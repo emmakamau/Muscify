@@ -1,17 +1,34 @@
 {% extends 'base_muscify.html'%}
 
 {%block content%}
-<div class="row track-display" align="center">
 {% for album in albums%}
-<div class="col-md-4">
-    <div class="card display-card">
-        <img class="card-img-top album-image" src="{{album.cover_medium}}" alt="album-image">
-        <p><cite title="View Artist">Artist: {{album.artistName}}</cite></p>
-        <div class="card-body">
-            <h5 class="card-title">Album: {{album.title}}</h5>
+<div class="row track-display">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+        <div class="card display-card">
+            <img class="card-img-top album-image" src="{{album.cover_medium}}" alt="album-image">
+            <p><cite title="View Artist">Artist: {{album.artistName}}</cite></p>
+            <div class="card-body">
+                <h3 class="card-title">Album: {{album.title}}</h3>
+            </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <br><br><br><br>
+        <h4>Tracks:</h4>
+        <div class="row">
+            {% for track in album.tracklist %}
+                <div class="col-md-4 col-sm-6 col-lg-4 col-xl-3 col-xs-6">
+                    <a href="/charts/tracks/{{track.id}}">
+                        <p class="card-title page-links" title="Listen to track">{{track.title}}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-1"></div>
 </div>
+<hr>
 {%endfor%}
-</div>
+
 {%endblock%}

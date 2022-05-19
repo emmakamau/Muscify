@@ -42,7 +42,7 @@ def artists():
 
     return render_template('artists.html',artists=allArtists)
 
-
+# Display each track and add reviews
 @main.route('/charts/tracks/<trackId>', methods = ['GET','POST'])
 @login_required
 def track(trackId):
@@ -57,6 +57,13 @@ def track(trackId):
         new_review.save_review()
         return redirect('/charts/tracks/{track_id}'.format(track_id=trackId))
     return render_template('charts-detail.html',track=track,reviews=reviews,review_form=review_form)
+
+@main.route('/charts/albums/<albumid>')
+@login_required
+def albums_tracks(albumid):
+    albums = getTracksForAlbums(albumid)
+    
+    return render_template('album-detail.html',albums=albums)
 
 @main.route('/user/<userid>/<uname>')
 def profile(userid,uname):

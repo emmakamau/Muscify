@@ -28,6 +28,13 @@ body {
   font-size: 1.2rem;
   color: white;
   min-height: 100vh;
+  overflow-x:hidden;
+}
+
+hr{
+  border: #0ff0fe solid 2px;
+  opacity: 0.3;
+  width: 80%;
 }
 
 .full-height-grow {
@@ -467,6 +474,21 @@ body {
   margin-top: 4vh;
 }
 
+/* Track album display */
+.display-album-track{
+  padding:2vh 0;
+}
+
+.track-album{
+  padding: 0 1vw;
+  font-size: larger;
+}
+
+.track-album-title{
+  font-size: larger;
+  color: #0ff0fe;
+}
+
 /* User profile */
 .user-profile{
   overflow: hidden;
@@ -475,3 +497,5 @@ body {
 .profile-pic{
   border-radius: 50%;
 }
+
+
