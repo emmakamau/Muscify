@@ -7,18 +7,18 @@
         <!-- id,title,link,preview,artistId,artistName,artistAlbum,albumImage -->
         <div class="col-md-1"></div>
         <div class="col-md-5">
-            <img src="{{track.albumImage}}" alt="" srcset="">
             <div class="track-detail">
-                <p><cite title="View Artist">Artist: {{track.artistName}}</cite></p>
-                <h5 class="card-title">Track: {{track.title}}</h5>
+                <h3 class="card-title">{{track.title}} <cite title="View Artist">by:{{track.artistName}}</cite> </h3>
+                <p></p>
                 <div class="card-body">
-                    <a href="{{track.preview}}" class="card-link page-links">Preview</a>
+                    <a href="{{track.preview}}" class="card-link page-links">Preview</a>&emsp;
                     <a href="{{track.link}}" class="card-link page-links">Listen</a>
                 </div>
             </div>
+            <img src="{{track.albumImageLarge}}" alt="" srcset="">
         </div>
-        <div class="col-md-5">
-            <div class="review-form">
+        <div class="col-md-5 review-form">
+            <div>
                 {{ wtf.quick_form(review_form) }}
             </div>
             <div class="reviews-display">

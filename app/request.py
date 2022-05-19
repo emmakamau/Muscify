@@ -26,9 +26,11 @@ def process_results_tracks(track_list):
     artistId = chart.get('artist',{}).get('id')
     artistName = chart.get('artist',{}).get('name')
     artistAlbum = chart.get('album',{}).get('id')
-    albumImage = chart.get('album',{}).get('cover_medium')
+    albumImageSmall = chart.get('album',{}).get('cover_small')
+    albumImageMedium = chart.get('album',{}).get('cover_medium')
+    albumImageLarge = chart.get('album',{}).get('cover_big')
     
-    chart_object = Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImage)
+    chart_object = Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
     track_results.append(chart_object)
   return track_results
 
@@ -131,9 +133,11 @@ def getTrack(trackId):
       artistId = track_details_response.get('artist',{}).get('id')
       artistName = track_details_response.get('artist',{}).get('name')
       artistAlbum = track_details_response.get('album',{}).get('name')
-      albumImage = track_details_response.get('album',{}).get('cover_medium')
+      albumImageSmall = track_details_response.get('album',{}).get('cover_small')
+      albumImageMedium = track_details_response.get('album',{}).get('cover_medium')
+      albumImageLarge = track_details_response.get('album',{}).get('cover_big')
 
-      track_object= Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImage)
+      track_object= Tracks(id,title,link,preview,artistId,artistName,artistAlbum,albumImageSmall,albumImageMedium,albumImageLarge)
   return track_object
 
 # def getChartPlaylists():

@@ -62,10 +62,11 @@ def track(trackId):
 def profile(userid,uname):
    user = User.query.filter_by(username = uname).first()
    title='User Profile'
-   reviews = Review.get_reviews(userid)
+   reviews = Review.get_reviews_by_user(userid)
+   
    if user is None:
       abort(404)
-   return render_template("profile/profile.html", title = title, reviews=reviews,user=user)
+   return render_template("profile/profile.html", title = title,reviews=reviews,user=user)
 
 
 @main.route('/user/<userid>/<uname>/update',methods = ['GET','POST'])

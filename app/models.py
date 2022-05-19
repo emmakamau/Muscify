@@ -35,7 +35,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
     
 class Tracks:
-    def __init__(self,id,title,link,preview,artistId,artistName,albumId,albumImage):
+    def __init__(self,id,title,link,preview,artistId,artistName,albumId,albumImageSmall,albumImageMedium,albumImageLarge):
         self.id = id
         self.title = title
         self.link = link
@@ -43,7 +43,9 @@ class Tracks:
         self.artistId = artistId
         self.artistName = artistName
         self.albumId = albumId
-        self.albumImage = albumImage
+        self.albumImageSmall = albumImageSmall
+        self.albumImageMedium = albumImageMedium
+        self.albumImageLarge = albumImageLarge
 
 class Albums:
     def __init__(self,id, title,link,artistId,artistName,albumImage,cover_medium):
@@ -97,4 +99,10 @@ class Review(db.Model):
     def get_reviews(cls,id):
         reviews = Review.query.filter_by(track_id=id).all()
         return reviews
+
+    @classmethod
+    def get_reviews_by_user(cls,id):
+        reviews = Review.query.filter_by(user_id=id).all()
+        return reviews
+
 
