@@ -1,0 +1,20 @@
+{% extends 'base_muscify.html'%}
+
+{%block content%}
+<div class="row track-display" align="center">
+{% for podcast in podcasts%}
+<div class="col-md-4">
+    <div class="card display-card">
+        <img class="card-img-top album-image" src="{{podcast.picture_medium}}" alt="podcast-image">
+        <h5><cite title="View Artist">Title: {{podcast.title}}</cite></h5>
+        <div class="card-body">
+            <p class="card-title">Description: {{podcast.description|truncate(150)}}</p>
+            <div class="card-body">
+                <a href="{{podcast.link}}" class="card-link page-links">Listen</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+</div>
+{%endblock%}

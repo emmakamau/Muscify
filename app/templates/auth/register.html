@@ -10,6 +10,8 @@
     <!-- Sign Up form -->
     <div class="join-form">
         {{wtf.quick_form(registration_form)}}
+        <br>
+        <p>Already have an account? <a class="page-links" href="{{url_for('auth.login')}}">SignIn here</a></p>
     </div>
 </section>
 <div class="join-page-circle-1"></div>
